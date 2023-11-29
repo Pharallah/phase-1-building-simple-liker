@@ -4,6 +4,28 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+// Returns a NodeList, Arrays of Span
+const glyph = document.querySelectorAll('.like-glyph');
+
+glyph.forEach(heart => heart.addEventListener('click', () => {
+  mimicServerCall()
+  .then((res) => {
+    if (heart.innerText === FULL_HEART) {
+      heart.innerText = EMPTY_HEART;
+      heart.classList.remove('activated-heart');
+    } else {
+      heart.innerText = FULL_HEART;
+      heart.classList.add('activated-heart');
+    }
+  })
+  .catch(error => {
+    const div = document.querySelector('div');
+    div.classList.remove('hidden');
+    setTimeout(() => {
+      div.classList.add('hidden')
+    }, 3000);
+  })
+}))
 
 
 
